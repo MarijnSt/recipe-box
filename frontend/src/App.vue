@@ -8,7 +8,11 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="nav-left">
           <RouterLink to="/">Recipes</RouterLink>
         </div>
-        <h2>Recipe Box</h2>
+        <div class="nav-center">
+          <RouterLink to="/">
+            <h2>Recipe Box</h2>
+          </RouterLink>
+        </div>
         <div class="nav-right">
           <RouterLink to="/about">About</RouterLink>
           <RouterLink to="/login">Login</RouterLink>
@@ -48,31 +52,31 @@ header {
       justify-content: flex-end;
     }
     
-    h2 {
+    .nav-center {
       flex: 2;
       text-align: center;
       margin: 0;
-      font-size: 2.5rem;
-      font-weight: 900;
+      h2 {
+        font-size: 3rem;
+      }
     }
 
     a {
       font-size: 1.25rem;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--color-primary);
       text-decoration: none;
       padding: 0.5rem 0;
-      transition: color 0.4s;
+      transition: border-bottom 0.4s;
       white-space: nowrap;
       border-bottom: 1px solid transparent;
 
       &:hover {
-        color: var(--color-text);
-        border-bottom: 1px solid var(--color-text);
+        border-bottom: 1px solid var(--color-primary-light);
       }
 
       &.router-link-active {
-        border-bottom: 1px solid var(--color-text);
+        border-bottom: 1px solid var(--color-primary);
       }
     }
   }

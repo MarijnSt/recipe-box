@@ -7,6 +7,7 @@
   --black: #181818;
   --beige: #fefef7;
   --green: #0B5351;
+  --green-light: rgba(11, 83, 81, 0.2);
 
   // Dividers
   --divider-light-1: rgba(60, 60, 60, 0.29);
@@ -30,6 +31,7 @@
   --color-text: var(--text-light-1);
 
   --color-primary: var(--green);
+  --color-primary-light: var(--green-light);
 
   // Layout
   --section-gap: 160px;
