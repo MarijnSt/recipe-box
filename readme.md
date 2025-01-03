@@ -11,6 +11,7 @@ pip install -r requirements.txt
 ### Frontend
 ```bash
 cd frontend
+nvm use
 npm install
 ```
 
@@ -22,5 +23,6 @@ python manage.py runserver
 ### Launch frontend
 ```bash
 cd frontend
+nvm use
 npm run dev
 ```
