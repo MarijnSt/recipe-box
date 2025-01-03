@@ -5,33 +5,47 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <div class="nav-left">
+          <RouterLink to="/">Recipes</RouterLink>
+        </div>
+        <h3>Recipe Box</h3>
+        <div class="nav-right">
+          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/search">Search</RouterLink>
+        </div>
       </nav>
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
-  padding: 2rem;
+  padding: 2rem 0;
   margin-bottom: 2rem;
+  
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  
+    a {
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      transition: 0.4s;
+  
+      &:hover {
+        color: var(--color-primary);
+      }
+  
+      &.router-link-active {
+        border-bottom: 2px solid var(--color-text);
+      }
+    }
+  }
 }
 
-nav {
-  display: flex;
-  gap: 1rem;
-}
-
-nav a {
-  color: var(--color-text);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-}
-
-nav a.router-link-active {
-  background-color: var(--color-background-soft);
-}
 </style>

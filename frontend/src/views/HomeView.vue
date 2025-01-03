@@ -4,7 +4,9 @@ import RecipeList from '@/components/RecipeList.vue'
 
 <template>
   <main>
-    <h1>Welcome to the Recipe Box</h1>
+    <h1>Recipe Box</h1>
     <RecipeList />
   </main>
 </template>
+
+
