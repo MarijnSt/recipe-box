@@ -6,6 +6,7 @@ class Recipe(models.Model):
     ingredients = models.TextField(help_text="Enter ingredients each on a new line")
     instruction = models.TextField()
     cooking_time = models.IntegerField(help_text="Enter cooking time in minutes")
+    image = models.ImageField(upload_to='recipe_images/', null=True, blank=True, help_text="Upload an image of the finished recipe")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
