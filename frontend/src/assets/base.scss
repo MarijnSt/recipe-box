@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap');
 // Variables
 :root {
   // Base colors
@@ -37,11 +37,11 @@
   --section-gap: 160px;
 
   // Typography
-  --font-family: 'Playfair', serif;
-  --font-family-heading: 'Playfair', serif;
+  --font-family: 'Quattrocento Sans', sans-serif;
+  --font-family-heading: 'Quattrocento', serif;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-green);
     --color-background-soft: var(--vt-c-green-soft);
@@ -55,7 +55,7 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
   }
-} */
+}
 
 *,
 *::before,

@@ -6,7 +6,7 @@
     <div class="recipe-card__content">
       <h3>{{ recipe.title }}</h3>
       <RouterLink :to="{ name: 'recipe', params: { id: recipe.id }}" class="see-recipe">
-        SEE RECIPE
+        See Recipe
         <span class="arrow">→</span>
       </RouterLink>
     </div>
@@ -27,7 +27,6 @@ defineProps<{
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--white);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -59,7 +58,8 @@ defineProps<{
   }
 
   &__content {
-    padding: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 2px solid var(--color-primary);
 
     h3 {
       margin: 0 0 1rem;
@@ -77,7 +77,7 @@ defineProps<{
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: none;
 
   .arrow {
