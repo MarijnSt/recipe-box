@@ -1,29 +1,34 @@
 <template>
   <div class="recipe" v-if="recipe">
-    <h1>{{ recipe.title }}</h1>
-    <div class="recipe-content">
-      <img :src="recipe.image" :alt="recipe.title" class="recipe-image">
-      <div class="recipe-details">
-        <div class="cooking-time">
-          <h3>Cooking Time</h3>
-          <p>{{ recipe.cooking_time }} minutes</p>
+    <div class="recipe__hero">
+      <img :src="recipe.image" :alt="recipe.title" class="recipe__image">
+    </div>
+    <div class="recipe__content">
+      <div class="recipe__header">
+        <h1 class="recipe__title">{{ recipe.title }}</h1>
+        <div class="recipe__meta">
+          <span class="recipe__time">
+            <i class="recipe__icon">⏱</i> {{ recipe.cooking_time }} minutes
+          </span>
+          <span class="recipe__author">
+            <i class="recipe__icon">👩‍🍳</i> {{ recipe.created_by.username }}
+          </span>
         </div>
-        <div class="ingredients">
-          <h3>Ingredients</h3>
-          <p>{{ recipe.ingredients }}</p>
+      </div>
+      <div class="recipe__details">
+        <div class="recipe__ingredients">
+          <h3 class="recipe__subtitle">Ingredients</h3>
+          <p class="recipe__text">{{ recipe.ingredients }}</p>
         </div>
-        <div class="instructions">
-          <h3>Instructions</h3>
-          <p>{{ recipe.instruction }}</p>
-        </div>
-        <div class="author">
-          <p>Created by: {{ recipe.created_by.username }}</p>
+        <div class="recipe__instructions">
+          <h3 class="recipe__subtitle">Instructions</h3>
+          <p class="recipe__text">{{ recipe.instruction }}</p>
         </div>
       </div>
     </div>
   </div>
-  <div v-else-if="loading" class="loading">Loading...</div>
-  <div v-else-if="error" class="error">{{ error }}</div>
+  <div v-else-if="loading" class="recipe--loading">Loading...</div>
+  <div v-else-if="error" class="recipe--error">{{ error }}</div>
 </template>
 
 <script setup lang="ts">
@@ -53,59 +58,99 @@ onMounted(async () => {
 .recipe {
   max-width: var(--max-width, 1280px);
   margin: 0 auto;
-  padding: 2rem;
 
-  h1 {
-    margin-bottom: 2rem;
+  &__hero {
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: 0 2rem;
+  }
+
+  &__header {
     text-align: center;
-  }
-}
-
-.recipe-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-.recipe-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-details {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  h3 {
-    color: var(--color-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 4rem;
   }
 
-  .author {
-    margin-top: auto;
-    font-style: italic;
+  &__title {
+    margin-bottom: 1rem;
+    font-family: var(--font-family-heading);
+    font-weight: 900;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
     color: var(--color-text);
+    font-size: 1.1rem;
   }
-}
 
-.loading,
-.error {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.2rem;
-}
+  &__time,
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.error {
-  color: red;
+  &__icon {
+    font-style: normal;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+
+  &__subtitle {
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-family-heading);
+    font-size: 1.75rem;
+  }
+
+  &__text {
+    white-space: pre-line;
+    line-height: 1.8;
+  }
+
+  &--loading,
+  &--error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+
+  &--error {
+    color: red;
+  }
 }
 
 @media (max-width: 768px) {
-  .recipe-content {
-    grid-template-columns: 1fr;
+  .recipe {
+    &__details {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    &__hero {
+      height: 40vh;
+      min-height: 300px;
+    }
   }
 }
 </style> 
