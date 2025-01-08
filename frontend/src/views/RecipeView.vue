@@ -11,7 +11,7 @@
             <i class="recipe__icon">⏱</i> {{ recipe.cooking_time }} minutes
           </span>
           <span class="recipe__author">
-            <i class="recipe__icon">👩‍🍳</i> {{ recipe.created_by.username }}
+            <i class="recipe__icon">✍︎</i> {{ recipe.created_by.username }}
           </span>
         </div>
       </div>
@@ -61,9 +61,9 @@ onMounted(async () => {
 
   &__hero {
     width: 100%;
-    height: 50vh;
-    min-height: 400px;
-    max-height: 600px;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 500px;
     overflow: hidden;
     margin-bottom: 3rem;
   }
@@ -148,8 +148,8 @@ onMounted(async () => {
     }
 
     &__hero {
-      height: 40vh;
-      min-height: 300px;
+      height: 30vh;
+      min-height: 200px;
     }
   }
 }
