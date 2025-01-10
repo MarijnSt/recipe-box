@@ -6,8 +6,8 @@ export const RecipeService = {
     return response.json();
   },
   
-  async getRecipe(id: string): Promise<Recipe> {
-    const response = await fetch(`http://localhost:8000/api/recipes/${id}`);
+  async getRecipe(slug: string): Promise<Recipe> {
+    const response = await fetch(`http://localhost:8000/api/recipes/${slug}`);
     if (!response.ok) {
       throw new Error('Recipe not found');
     }
