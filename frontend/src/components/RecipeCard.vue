@@ -1,11 +1,11 @@
 <template>
-  <RouterLink :to="{ name: 'recipe', params: { id: recipe.id }}" class="recipe-card">
+  <RouterLink :to="{ name: 'recipe', params: { slug: recipe.slug }}" class="recipe-card">
     <div class="recipe-card__image">
       <img :src="recipe.image" :alt="recipe.title">
     </div>
     <div class="recipe-card__content">
       <h3>{{ recipe.title }}</h3>
-      <RouterLink :to="{ name: 'recipe', params: { id: recipe.id }}" class="see-recipe">
+      <RouterLink :to="{ name: 'recipe', params: { slug: recipe.slug }}" class="see-recipe">
         See Recipe
         <span class="arrow">→</span>
       </RouterLink>

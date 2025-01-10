@@ -43,9 +43,9 @@ const loading = ref(true)
 const error = ref<string | null>(null)
 
 onMounted(async () => {
-  const id = route.params.id as string
+  const slug = route.params.slug as string
   try {
-    recipe.value = await RecipeService.getRecipe(id)
+    recipe.value = await RecipeService.getRecipe(slug)
   } catch (err) {
     error.value = 'Failed to load recipe'
   } finally {

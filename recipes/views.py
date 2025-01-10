@@ -6,6 +6,7 @@ from .serializers import RecipeSerializer
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    lookup_field = 'slug'
 
     def get_permissions(self):
         """unauthenticated users can list and retrieve recipes, but cannot create, update, or delete"""
