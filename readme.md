@@ -1,4 +1,4 @@
-A project I'll use to learn about Django, Vue and TypeScript.
+A project I'll use to learn about Django, Django Rest Framework, Vue and TypeScript.
 
 ## Project setup
 ### Backend
