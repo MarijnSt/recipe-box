@@ -15,7 +15,7 @@ function logout() {
 
 <template>
   <main class="profile-page">
-    <h1 class="profile-page__title">Profile</h1>
+    <h1 class="profile-page__title">Hi {{ authStore.user?.username }}!</h1>
     <button class="profile-page__logout" @click="logout">Logout</button>
   </main>
 </template>
