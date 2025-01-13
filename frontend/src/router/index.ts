@@ -24,14 +24,14 @@ const router = createRouter({
     //   name: 'register',
     //   component: () => import('../views/RegisterView.vue'),
     // },
-    // {
-    //   path: "/profile",
-    //   name: "profile",
-    //   component: () => import('../views/ProfileView.vue'),
-    //   meta: {
-    //     requiresAuth: true,
-    //   },
-    // },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () => import('../views/ProfileView.vue'),
+      meta: {
+        requiresAuth: true,
+      },
+    },
     {
       path: '/recipe/:slug',
       name: 'recipe',
@@ -53,17 +53,27 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  // check auth status if we haven't already (e.g. on page load)
-  if (!authStore.isAuthenticated && !authStore.isLoading) {
-    await authStore.getUserInfo();
+  // Only check auth status once on initial page load
+  if (!authStore.isAuthenticated && !authStore.isLoading && from.name === undefined) {
+    try {
+      await authStore.getUserInfo();
+    } catch (error) {
+      // Failed to get user info - user is not authenticated
+      if (to.meta.requiresAuth) {
+        return next({
+          path: '/login',
+          query: { redirect: to.fullPath },
+        });
+      }
+    }
   }
 
-  // redirect to login if not authenticated
+  // Handle protected routes
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    return {
+    return next({
       path: '/login',
       query: { redirect: to.fullPath },
-    };
+    });
   }
 
   next();

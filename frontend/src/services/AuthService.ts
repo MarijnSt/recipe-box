@@ -50,7 +50,7 @@ export const AuthService = {
     },
 
     async logout(): Promise<void> {
-        const response = await fetch("http://localhost:8000/api/auth/logout", {
+        const response = await fetch("http://localhost:8000/api/auth/logout/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -67,7 +67,7 @@ export const AuthService = {
     },
 
     async getUserInfo(): Promise<User> {
-        const response = await fetch("http://localhost:8000/api/auth/user", {
+        const response = await fetch("http://localhost:8000/api/auth/user/", {
             credentials: "include",
         });
 
