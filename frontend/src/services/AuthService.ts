@@ -2,7 +2,7 @@ import type { User } from "@/types/User";
 
 export const AuthService = {
     async getCsrfToken(): Promise<string> {
-        const response = await fetch("http://localhost:8000/api/auth/get-csrf-token", {
+        const response = await fetch("http://localhost:8000/api/auth/csrf/", {
             credentials: "include",
         });
         const data = await response.json();
@@ -10,7 +10,7 @@ export const AuthService = {
     },
 
     async register(username: string, password: string, email: string): Promise<User> {
-        const response = await fetch("http://localhost:8000/api/auth/register", {
+        const response = await fetch("http://localhost:8000/api/auth/register/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -30,7 +30,7 @@ export const AuthService = {
     },
 
     async login(username: string, password: string): Promise<User> {
-        const response = await fetch("http://localhost:8000/api/auth/login", {
+        const response = await fetch("http://localhost:8000/api/auth/login/", {
             method: "POST",
             credentials: "include",
             headers: {

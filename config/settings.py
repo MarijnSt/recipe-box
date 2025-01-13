@@ -134,9 +134,12 @@ REST_FRAMEWORK = {
     ],
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:1337"  # Allows form submissions from Vue frontend
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:1337", # Vue frontend
+    "http://localhost:1337", # Allows requests from Vue frontend
 ]
 
 # Media files

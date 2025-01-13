@@ -145,7 +145,7 @@ async function handleSubmit() {
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: darken(#0B5351, 5%);
+      background-color: var(--color-primary-dark);
     }
 
     &:disabled {
