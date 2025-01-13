@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
+    "authentication",
     "recipes",
 ]
 
@@ -126,8 +127,19 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:1337"  # Allows form submissions from Vue frontend
+]
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:1337", # Vue frontend
+    "http://localhost:1337", # Allows requests from Vue frontend
 ]
 
 # Media files

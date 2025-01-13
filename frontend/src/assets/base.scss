@@ -6,8 +6,11 @@
   --white: #ffffff;
   --black: #181818;
   --beige: #fefef7;
+  --beige-light: #fefef9;
+  --beige-dark: #e5e5de;
   --green: #0B5351;
-  --green-light: rgba(11, 83, 81, 0.2);
+  --green-light: #3c7574;
+  --green-dark: #0a4b49;
 
   // Dividers
   --divider-light-1: rgba(60, 60, 60, 0.29);
@@ -32,6 +35,7 @@
 
   --color-primary: var(--green);
   --color-primary-light: var(--green-light);
+  --color-primary-dark: var(--green-dark);
 
   // Layout
   --container-width: 1280px;

@@ -3,11 +3,11 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import UserIcon from '@/components/icons/UserIcon.vue'
-const isMenuOpen = ref(false)
+import { useAuthStore } from '@/stores/auth'
 
-function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
-}
+const authStore = useAuthStore()
+
+
 </script>
 
 <template>
@@ -20,7 +20,7 @@ function toggleMenu() {
           <RouterLink to="/search">
             <SearchIcon />
           </RouterLink>
-          <RouterLink to="/login">
+          <RouterLink :to="authStore.isAuthenticated ? '/profile' : '/login'">
             <UserIcon />
           </RouterLink>
         </div>
