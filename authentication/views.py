@@ -1,13 +1,11 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework import status
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.middleware.csrf import get_token
-from django.http import JsonResponse
-from rest_framework.decorators import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -28,13 +26,19 @@ def register(request):
             status=status.HTTP_400_BAD_REQUEST
         )
     
+    if User.objects.filter(email=email).exists():
+        return Response(
+            {'message': 'Email already exists'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
     try:
         user = User.objects.create_user(
             username=username,
             password=password,
             email=email
         )
-        login(request, user)
+        django_login(request._request, user)
         return Response(
             {
                 'message': 'User registered successfully',
@@ -60,7 +64,7 @@ def login(request):
     user = authenticate(username=username, password=password)
 
     if user:
-        login(request, user)
+        django_login(request._request, user)
         return Response(
             {
                 'message': 'Login successful',
@@ -81,14 +85,14 @@ def login(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def logout(request):
-    logout(request)
+    django_logout(request._request)
     return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 @ensure_csrf_cookie
 def get_csrf_token(request):
-    return JsonResponse({'csrfToken': get_token(request)})
+    return Response({'csrfToken': get_token(request)})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
