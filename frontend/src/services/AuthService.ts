@@ -67,7 +67,7 @@ export const AuthService = {
     },
 
     async getUserInfo(): Promise<User> {
-        const response = await fetch("http://localhost:8000/api/auth/get-user-info", {
+        const response = await fetch("http://localhost:8000/api/auth/user", {
             credentials: "include",
         });
 

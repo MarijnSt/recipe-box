@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
+import RecipeView from '../views/RecipeView.vue'
+import SearchView from '../views/SearchView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
@@ -10,20 +14,20 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
     // {
     //   path: '/register',
     //   name: 'register',
     //   component: () => import('../views/RegisterView.vue'),
     // },
     // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: () => import('../views/LoginView.vue'),
-    // },
-    // {
-    //   path: "/account",
-    //   name: "account",
-    //   component: () => import('../views/AccountView.vue'),
+    //   path: "/profile",
+    //   name: "profile",
+    //   component: () => import('../views/ProfileView.vue'),
     //   meta: {
     //     requiresAuth: true,
     //   },
@@ -31,7 +35,17 @@ const router = createRouter({
     {
       path: '/recipe/:slug',
       name: 'recipe',
-      component: () => import('../views/RecipeView.vue'),
+      component: RecipeView,
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchView,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFoundView,
     },
   ],
 })
@@ -51,6 +65,8 @@ router.beforeEach(async (to, from, next) => {
       query: { redirect: to.fullPath },
     };
   }
+
+  next();
 });
 
 export default router
