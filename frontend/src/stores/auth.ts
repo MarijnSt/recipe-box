@@ -61,6 +61,7 @@ export const useAuthStore = defineStore("auth", () => {
 
         try {
             user.value = await AuthService.getUserInfo();
+            isAuthenticated.value = true;
         } catch (e) {
             error.value = e instanceof Error ? e.message : "Failed to get user info";
             throw e;
