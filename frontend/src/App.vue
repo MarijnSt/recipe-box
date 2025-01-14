@@ -36,9 +36,10 @@ header nav {
   padding: var(--container-padding);
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   position: relative;
+  border-bottom: 1px solid var(--color-border);
 
   .nav-right {
     position: absolute;
@@ -53,9 +54,9 @@ header nav {
   }
 }
 
-@media (max-width: 768px) {
+@include breakpoint(sm) {
   header nav {
-    justify-content: left;
+    justify-content: center;
   }
 }
 </style>
