@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap');
+
+:root {
+    --font-family: 'Quattrocento Sans', sans-serif;
+    --font-family-heading: 'Quattrocento', serif;
+    --font-size: 12px;
+    --line-height: 1.5;
+
+    // Tablet
+    @media (min-width: 768px) {
+        --font-size: 14px;
+        --line-height: 1.6;
+    }
+
+    // Desktop
+    @media (min-width: 1024px) {
+        --font-size: 15px;
+    }
+
+    // Large Desktop
+    @media (min-width: 1280px) {
+        //
+    }
+}
+
+*,
+*::before,
+*::after {
+    font-weight: normal;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-family-heading);
+        color: var(--color-heading);
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    h2 {
+        font-weight: 900;
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-weight: 900;
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+    h5 {
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    h6 {
+        font-weight: 700;
+        font-size: 0.875rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

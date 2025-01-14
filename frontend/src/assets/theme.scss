@@ -1,12 +1,10 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap');
 // Variables
 :root {
   // Base colors
   --white: #ffffff;
   --black: #181818;
   --beige: #fefef7;
-  --beige-light: #fefef9;
+  --beige-light: #fefefc;
   --beige-dark: #e5e5de;
   --green: #0B5351;
   --green-light: #3c7574;
@@ -26,6 +24,7 @@
 
   // Semantic colors
   --color-background: var(--beige);
+  --color-background-light: var(--beige-light);
 
   --color-border: var(--divider-light-2);
   --color-border-hover: var(--divider-light-1);
@@ -36,15 +35,6 @@
   --color-primary: var(--green);
   --color-primary-light: var(--green-light);
   --color-primary-dark: var(--green-dark);
-
-  // Layout
-  --container-width: 1280px;
-  --container-padding: 2rem;
-  --section-gap: 160px;
-
-  // Typography
-  --font-family: 'Quattrocento Sans', sans-serif;
-  --font-family-heading: 'Quattrocento', serif;
 
   // Icons
   --icon-size: 24px;
@@ -69,23 +59,8 @@
   }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
-}
-
 body {
-  min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
-  font-family: var(--font-family);
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
