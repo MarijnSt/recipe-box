@@ -1,0 +1,15 @@
+@use "sass:map";
+// Tailwind breakpoints
+$breakpoints: (
+    sm: 768px,
+    md: 1024px,
+    lg: 1280px,
+    xl: 1536px,
+);
+
+// Sass Mixins
+@mixin breakpoint($size) {
+    @media (min-width: map.get($breakpoints, $size)) {
+        @content;
+    }
+}

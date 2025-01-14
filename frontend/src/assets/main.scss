@@ -1,3 +1,9 @@
-@use './theme.scss';
-@use './layout.scss';
-@use './typography.scss';
+@use './styles/theme.scss';
+@use './styles/layout.scss';
+@use './styles/typography.scss';
+
+/*
+    General rule of thumb:
+    - Use CSS variables for values that components need (colors, spacing, sizes, etc.)
+    - Use Sass variables/mixins for structural layout changes and media queries
+*/
