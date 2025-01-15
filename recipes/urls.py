@@ -7,4 +7,5 @@ router.register(r'recipes', views.RecipeViewSet, basename='recipe')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('categories', views.get_categories, name='recipe-categories'),
 ]
