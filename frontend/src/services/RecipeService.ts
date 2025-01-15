@@ -3,7 +3,7 @@ import type { RecipeCategory } from "@/types/RecipeCategory";
 
 export const RecipeService = {
   async getCategories(): Promise<RecipeCategory[]> {
-    const response = await fetch("http://localhost:8000/api/recipes/categories");
+    const response = await fetch("http://localhost:8000/api/categories");
     if (!response.ok) {
       throw new Error('Failed to fetch categories');
     }
@@ -11,12 +11,12 @@ export const RecipeService = {
   },
 
   async getRecipes(): Promise<Recipe[]> {
-    const response = await fetch("http://localhost:8000/api/recipes");
+    const response = await fetch("http://localhost:8000/api/recipes/");
     return response.json();
   },
   
   async getRecipe(slug: string): Promise<Recipe> {
-    const response = await fetch(`http://localhost:8000/api/recipes/${slug}`);
+    const response = await fetch(`http://localhost:8000/api/recipes/${slug}/`);
     if (!response.ok) {
       throw new Error('Recipe not found');
     }

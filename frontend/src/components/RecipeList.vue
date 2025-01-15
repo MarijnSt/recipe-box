@@ -2,6 +2,7 @@
 import { ref, onMounted, computed } from "vue";
 import { RecipeService } from "@/services/RecipeService";
 import type { Recipe } from "@/types/Recipe";
+import type { RecipeCategory } from "@/types/RecipeCategory";
 import RecipeCard from './RecipeCard.vue';
 import { useAuthStore } from '@/stores/auth';
 
@@ -9,20 +10,19 @@ const recipes = ref<Recipe[]>([]);
 const loading = ref(false);
 const error = ref<string | null>(null);
 const selectedCategories = ref<Set<string>>(new Set());
+const categories = ref<RecipeCategory[]>([]);
 const showMyRecipes = ref(false);
 // const showSavedRecipes = ref(false);
 
 const authStore = useAuthStore();
 
-const categories = [
-    { value: 'breakfast', label: 'Breakfast' },
-    { value: 'lunch', label: 'Lunch' },
-    { value: 'dinner', label: 'Dinner' },
-    { value: 'snack', label: 'Snack' },
-    { value: 'dessert', label: 'Dessert' },
-    { value: 'drink', label: 'Drink' },
-    { value: 'other', label: 'Other' }
-];
+const fetchCategories = async () => {
+    try {
+        categories.value = await RecipeService.getCategories();
+    } catch (err) {
+        console.error("Failed to fetch categories",err);
+    }
+}
 
 const fetchRecipes = async () => {
     loading.value = true;
@@ -64,6 +64,7 @@ const filteredRecipes = computed(() => {
 });
 
 onMounted(() => {
+    fetchCategories();
     fetchRecipes();
 });
 </script>
