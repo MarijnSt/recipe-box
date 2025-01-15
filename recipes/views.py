@@ -1,7 +1,9 @@
-from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from .models import Recipe
 from .serializers import RecipeSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .constants import RecipeCategory
 
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
@@ -25,3 +27,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return Recipe.objects.all()
 
         return Recipe.objects.filter(created_by=self.request.user)
+
+@api_view(['GET'])
+def get_categories(request):
+    return Response([
+        {'value': category.value, 'label': category.name.title()} 
+        for category in RecipeCategory
+    ])
