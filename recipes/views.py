@@ -16,6 +16,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = RecipeSerializer
     lookup_field = 'slug'
     pagination_class = RecipePagination
+
     def get_permissions(self):
         """unauthenticated users can list and retrieve recipes, but cannot create, update, or delete"""
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
@@ -33,9 +34,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
             queryset = Recipe.objects.all()
 
             # Filter by category
-            category = self.request.query_params.get('category', None)
-            if category:
-                queryset = queryset.filter(category=category)
+            categories = self.request.query_params.get('categories', None)
+            if categories:
+                category_list = categories.split(',')
+                queryset = queryset.filter(category__in=category_list)
 
             # Filter by user
             user = self.request.query_params.get('created_by', None)

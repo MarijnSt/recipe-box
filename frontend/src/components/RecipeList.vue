@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { RecipeService } from "@/services/RecipeService";
 import type { Recipe } from "@/types/Recipe";
 import type { RecipeCategory } from "@/types/RecipeCategory";
 import RecipeCard from './RecipeCard.vue';
 import { useAuthStore } from '@/stores/auth';
 
+const currentPage = ref(1);
+const totalPages = ref(1);
+const pageSize = 10;
+const totalRecipes = ref(0);
+
+const categories = ref<RecipeCategory[]>([]);
+const selectedCategories = ref<Set<string>>(new Set());
 const recipes = ref<Recipe[]>([]);
 const loading = ref(false);
 const error = ref<string | null>(null);
-const selectedCategories = ref<Set<string>>(new Set());
-const categories = ref<RecipeCategory[]>([]);
 const showMyRecipes = ref(false);
 // const showSavedRecipes = ref(false);
 
@@ -27,7 +32,16 @@ const fetchCategories = async () => {
 const fetchRecipes = async () => {
     loading.value = true;
     try {
-        recipes.value = await RecipeService.getRecipes();
+        const filters = {
+            page: currentPage.value,
+            page_size: pageSize,
+            ...(selectedCategories.value.size > 0 && { categories: Array.from(selectedCategories.value) }),
+            ...(showMyRecipes.value && authStore.user && { created_by: authStore.user.id })
+        }
+        const response = await RecipeService.getRecipes(filters);
+        recipes.value = response.results;
+        totalRecipes.value = response.count;
+        totalPages.value = Math.ceil(totalRecipes.value / pageSize);
     } catch (err) {
         error.value = "Failed to fetch recipes";
     } finally {
@@ -44,27 +58,18 @@ const toggleCategory = (category: string) => {
     selectedCategories.value = new Set(selectedCategories.value); // Trigger reactivity
 };
 
-const filteredRecipes = computed(() => {
-    let filtered = recipes.value;
-
-    // Apply category filters
-    if (selectedCategories.value.size > 0) {
-        filtered = filtered.filter(recipe => selectedCategories.value.has(recipe.category));
-    }
-
-    // Apply user filters
-    if (showMyRecipes.value) {
-        filtered = filtered.filter(recipe => recipe.created_by.id === authStore.user?.id);
-    }
-    // if (showSavedRecipes.value) {
-    //     filtered = filtered.filter(recipe => recipe.is_saved);
-    // }
-
-    return filtered;
-});
 
 onMounted(() => {
     fetchCategories();
+    fetchRecipes();
+});
+
+watch([selectedCategories, showMyRecipes], () => {
+    currentPage.value = 1; // Reset to first page when filters change
+    fetchRecipes();
+});
+
+watch(currentPage, () => {
     fetchRecipes();
 });
 </script>
@@ -102,13 +107,32 @@ onMounted(() => {
         <div v-if="loading" class="loading">Loading...</div>
         <div v-else-if="error" class="error">Error: {{ error }}</div>
         <div v-else>
-            <div v-if="filteredRecipes.length === 0" class="no-recipes">No recipes found</div>
+            <div v-if="recipes.length === 0" class="no-recipes">No recipes found</div>
             <div v-else class="recipe-grid">
                 <RecipeCard
-                    v-for="recipe in filteredRecipes"
+                    v-for="recipe in recipes"
                     :key="recipe.id"
                     :recipe="recipe"
                 />
+                <div v-if="totalPages > 1" class="pagination">
+                    <button 
+                    :disabled="currentPage === 1"
+                    @click="currentPage--"
+                    class="pagination__button"
+                    >
+                        Previous
+                    </button>
+                    <span class="pagination__info">
+                        Page {{ currentPage }} of {{ totalPages }}
+                    </span>
+                    <button 
+                    :disabled="currentPage === totalPages"
+                    @click="currentPage++"
+                    class="pagination__button"
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     </div>
