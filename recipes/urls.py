@@ -6,6 +6,6 @@ router = DefaultRouter()
 router.register(r'recipes', views.RecipeViewSet, basename='recipe')
 
 urlpatterns = [
+    path('recipes/categories', views.get_categories, name='recipe-categories'),
     path('', include(router.urls)),
-    path('categories', views.get_categories, name='recipe-categories'),
 ]
