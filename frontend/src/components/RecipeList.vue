@@ -187,7 +187,7 @@ watch(currentPage, () => {
 
     &.active {
         background: var(--color-primary);
-        color: var(--color-white);
+        color: var(--white);
         border-color: var(--color-primary);
     }
 }
